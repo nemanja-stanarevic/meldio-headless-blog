@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "version": "0.0.1",
+  "config": {
+    "meldio": {
+      "dbConnectionUri": "mongodb://localhost:27017/blog",
+      "protocol": "http",
+      "host": "localhost",
+      "port": 9000,
+      "enabledAuth": [
+        "facebook"
+      ],
+      "sessionDurationUnit": "days",
+      "sessionDuration": 2,
+      "scopes": {
+        "facebook": [
+          "public_profile",
+          "email"
+        ]
+      },
+      "root": "",
+      "schema": "schema.sdl",
+      "permissions": "permissions.js",
+      "mutations": "mutations",
+      "hooks": "hooks",
+      "build": ".build"
+    }
+  }
+}

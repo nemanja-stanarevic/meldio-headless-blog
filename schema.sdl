@@ -1,0 +1,43 @@
+type User implements Node @rootViewer(field: "viewer") {
+   id: ID!                    # id field is required by Node interface
+   firstName: String
+   lastName: String
+   emails: [String]!
+   profilePictureUrl: String
+   blogs: NodeConnection(Blog, owner)
+}
+
+type Blog implements Node @rootConnection(field: "allBlogs") {
+  id: ID!
+  owner: NodeConnection(User, blogs)
+  name: String!
+  description: String
+  rating: Int
+  posts: NodeConnection(Post, blog)
+}
+
+type Post implements Node {
+  id: ID!
+  blog: NodeConnection(Blog, posts)
+  timestamp: String!
+  headline: String
+  text: String
+}
+
+mutation addBlog(
+  name: String!
+  description: String
+) {
+  blog: Blog
+  viewer: User
+}
+
+mutation addPost(
+  id: ID!
+  headline: String
+  text: String
+) {
+  post: Post
+  blog: Blog
+  viewer: User
+}
